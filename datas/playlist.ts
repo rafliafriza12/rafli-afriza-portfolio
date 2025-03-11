@@ -1,0 +1,66 @@
+import { PlaylistType } from "@/types";
+export const playlist: PlaylistType[] = [
+  {
+    cover: "/assets/songPic/yungkai.jpeg",
+    title: "Yungkai - Blue",
+    artist: "Yungkai",
+    songTitle: "Blue",
+    src: "/assets/songs/yungkai-blue.mp3",
+  },
+  {
+    cover: "/assets/songPic/d4vd.jpeg",
+    title: "d4vd - Romantic Homicide",
+    artist: "d4vd",
+    songTitle: "Romantic Homicide",
+    src: "/assets/songs/d4vd-romantic-homicide.mp3",
+  },
+  {
+    cover: "/assets/songPic/djo.jpeg",
+    title: "Djo - End Of Beginning",
+    artist: "Djo",
+    songTitle: "End Of Beginning",
+    src: "/assets/songs/djo-end-of-beginning.mp3",
+  },
+  {
+    cover: "/assets/songPic/mitski.jpeg",
+    title: "Mitski - My Love Mine All Mine",
+    artist: "Mitski",
+    songTitle: "My Love Mine All Mine",
+    src: "/assets/songs/mitski-my-love-mine-all-mine.mp3",
+  },
+  {
+    cover: "/assets/songPic/arctic-monkey.jpeg",
+    title: "Arctic Monkeys - No. 1 Party Anthem",
+    artist: "Arctic Monkeys",
+    songTitle: "No. 1 Party Anthem",
+    src: "/assets/songs/arctic-monkeys-no-1-party-anthem.mp3",
+  },
+  {
+    cover: "/assets/songPic/arctic-monkey.jpeg",
+    title: "Arctic Monkeys - I Wanna Be Yours",
+    artist: "Arctic Monkeys",
+    songTitle: "I Wanna Be Yours",
+    src: "/assets/songs/arctic-monkeys-i-wanna-be-yours.mp3",
+  },
+  {
+    cover: "/assets/songPic/cas.jpeg",
+    title: "Cigarettes After Sex - Apocalypse",
+    artist: "Cigarettes After Sex",
+    songTitle: "Apocalypse",
+    src: "/assets/songs/cigarettes-after-sex-apocalypse.mp3",
+  },
+  {
+    cover: "/assets/songPic/cas.jpeg",
+    title: "Cigarettes After Sex - Sunsetz",
+    artist: "Cigarettes After Sex",
+    songTitle: "Sunsetz",
+    src: "/assets/songs/cigarettes-after-sex-sunsetz.mp3",
+  },
+  {
+    cover: "/assets/songPic/chezile.jpeg",
+    title: "Chezile - Beanie",
+    artist: "Chezile",
+    songTitle: "Beanie",
+    src: "/assets/songs/chezile-beanie.mp3",
+  },
+];

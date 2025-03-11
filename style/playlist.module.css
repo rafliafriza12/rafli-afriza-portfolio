@@ -1,0 +1,57 @@
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: #31363f;
+  outline: none;
+  position: relative;
+}
+
+/* This creates the white filled portion */
+.slider::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #ffffff var(--progress),
+    #31363f var(--progress),
+    #31363f 100%
+  );
+  border-radius: 5px;
+  height: 6px;
+}
+
+.slider::-moz-range-track {
+  background: #31363f;
+  border-radius: 5px;
+  height: 6px;
+}
+
+.slider::-moz-range-progress {
+  background: #ffffff;
+  border-radius: 5px;
+  height: 6px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -3px;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
