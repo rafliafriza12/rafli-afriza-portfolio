@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Star } from "lucide-react";
 import { Service, ServiceCardProps } from "@/types";
+import Link from "next/link";
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
   return (
@@ -34,9 +35,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                 <h1 className=" font-medium text-xs">{card.type}</h1>
               </div>
 
-              <button className=" px-5 py-1 font-bold bg-[#1B5F96] text-base rounded-md">
+              <Link
+                href={card.linkOrder}
+                target="_blank"
+                className=" px-5 py-1 font-bold bg-[#1B5F96] text-base rounded-md"
+              >
                 Order
-              </button>
+              </Link>
 
               <p className=" w-full text-left text-xs text-gray-400">
                 {card.description}

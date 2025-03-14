@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Mail, Phone, Instagram, Facebook, Send } from "lucide-react";
+// import { onSendEmail } from "@/utils";
 const ContactPage: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [isNameFocus, setIsNameFocus] = useState<boolean>(false);
@@ -10,6 +11,8 @@ const ContactPage: React.FC = () => {
 
   const [subject, setSubject] = useState<string>("");
   const [isSubjectFocus, setIsSubjectFocus] = useState<boolean>(false);
+
+  const [message, setMessage] = useState<string>("");
 
   const handleBlur = (type: string): void => {
     if (type === "name") {
@@ -32,7 +35,7 @@ const ContactPage: React.FC = () => {
       <div className=" w-full flex justify-between items-start pl-20 pr-10 text-white">
         <div className=" w-[30%] flex flex-col items-start justify-center gap-7">
           <h1 className=" font-extrabold text-3xl">
-            DON'T BE <span className="text-[#1B5F96]">SHY !</span>
+            DON'T BE A <span className="text-[#1B5F96]">STRANGER !</span>
           </h1>
           <p className=" w-full font-normal text-base text-gray-300">
             Feel from in get in touch with me. I'm always open to discussing new
@@ -131,12 +134,17 @@ const ContactPage: React.FC = () => {
               id=""
               cols={30}
               rows={10}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className=" w-full bg-transparent border-[3px] border-[#31363F] rounded-lg p-2  focus:outline-none focus:shadow-[0px_0px_7px_#31363F] duration-300"
             ></textarea>
           </div>
 
           <div className="">
-            <button className=" h-[50px] w-[250px] rounded-md border-[3px] border-[#31363F] flex items-center justify-between duration-200 hover:-translate-y-1">
+            <button
+              // onClick={() => onSendEmail(name, email, subject, message)}
+              className=" h-[50px] w-[250px] rounded-md border-[3px] border-[#31363F] flex items-center justify-between duration-200 hover:-translate-y-1"
+            >
               <h1 className="text-center w-[200px] font-bold text-gray-300">
                 Send
               </h1>
