@@ -207,6 +207,7 @@ const PlayList = () => {
           {playlist.map((song: PlaylistType, i: number) => {
             return (
               <div
+                key={i}
                 onClick={() => handleChoose(i)}
                 className={`cursor-pointer w-[98%] px-3 flex gap-4 hover:bg-[#888888]/50 py-3 rounded-[5px] ${
                   currentSong === i ? "bg-[#888888]/50" : "bg-transparent"

@@ -1,6 +1,13 @@
 import { PlaylistType } from "@/types";
 export const playlist: PlaylistType[] = [
   {
+    cover: "/assets/songPic/aziz-hendra.jpeg",
+    title: "Aziz Hendra - Somebody's Pleasure",
+    artist: "Aziz Hendra",
+    songTitle: "Somebody's Pleasure",
+    src: "/assets/songs/aziz-hedra-somebodys-pleasure.mp3",
+  },
+  {
     cover: "/assets/songPic/yungkai.jpeg",
     title: "Yungkai - Blue",
     artist: "Yungkai",
