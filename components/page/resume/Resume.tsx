@@ -1,3 +1,6 @@
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+
 const ResumePage: React.FC = () => {
   return (
     <div className="w-full bg-transparent flex flex-col gap-12 items-center py-20">
@@ -6,7 +9,7 @@ const ResumePage: React.FC = () => {
       </div>
 
       <div className=" w-full px-20 flex justify-between items-start">
-        <div className=" w-[58%] flex flex-col gap-10 items-start">
+        <div className=" w-[50%] flex flex-col gap-10 items-start">
           <div className=" w-full flex flex-col items-start gap-5">
             <div>
               <h1 className=" font-bold text-2xl text-white">Education</h1>
@@ -130,152 +133,6 @@ const ResumePage: React.FC = () => {
               </ol>
             </div>
           </div>
-        </div>
-
-        <div className=" w-[40%] flex flex-col gap-14 items-start">
-          <div className=" w-full flex flex-col items-start">
-            <div>
-              <h1 className=" font-bold text-2xl text-white pb-1">
-                Design Skills
-              </h1>
-              <div className="rounded-full h-[1px] mb-4 bg-gray-700"></div>
-            </div>
-
-            <div className=" w-full flex flex-col gap-1 text-white">
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">Web Design</h1>
-                  <h1 className=" text-gray-400">87%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "87%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">Figma</h1>
-                  <h1 className=" text-gray-400">70%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "70%" }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className=" w-full flex flex-col items-start">
-            <div>
-              <h1 className=" font-bold text-2xl text-white pb-1">
-                Coding Skills
-              </h1>
-              <div className="rounded-full h-[1px] mb-4 bg-gray-700"></div>
-            </div>
-
-            <div className=" w-full flex flex-col gap-1 text-white">
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">React.JS</h1>
-                  <h1 className=" text-gray-400">85%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "85%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">Laravel</h1>
-                  <h1 className=" text-gray-400">92%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "92%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">Javasript</h1>
-                  <h1 className=" text-gray-400">95%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "95%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">Typesript</h1>
-                  <h1 className=" text-gray-400">80%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "80%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">HTML</h1>
-                  <h1 className=" text-gray-400">100%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "100%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">CSS</h1>
-                  <h1 className=" text-gray-400">98%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "98%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">C</h1>
-                  <h1 className=" text-gray-400">75%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "75%" }}
-                  ></div>
-                </div>
-              </div>
-              <div className=" w-full">
-                <div className=" w-full flex items-center justify-between">
-                  <h1 className=" font-bold text-base ">Java</h1>
-                  <h1 className=" text-gray-400">78%</h1>
-                </div>
-                <div className="rounded-full h-1 mb-4 bg-gray-700">
-                  <div
-                    className="bg-[#1B5F96] h-1 rounded-full"
-                    style={{ width: "78%" }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div className=" w-full flex flex-col items-start">
             <div>
@@ -298,6 +155,159 @@ const ResumePage: React.FC = () => {
               <div className=" px-3 bg-[#1B5F96]">Internet of Things</div>
               <div className=" px-3 bg-[#1B5F96]">Docker</div>
               <div className=" px-3 bg-[#1B5F96]">REST API</div>
+            </div>
+          </div>
+        </div>
+
+        <div className=" w-[48%] flex flex-col gap-14 items-start">
+          <div className=" w-full flex flex-col items-start gap-5">
+            <div>
+              <h1 className=" font-bold text-2xl text-white">Project</h1>
+              <div className="rounded-full h-1 mb-4 bg-gray-700">
+                <div
+                  className="bg-[#1B5F96] h-1 rounded-full"
+                  style={{ width: "20%" }}
+                ></div>
+              </div>
+            </div>
+
+            <div className=" w-full px-4">
+              <ol className="relative border-s border-gray-700">
+                <li className="mb-10 ms-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6  rounded-full -start-3  bg-[#1B5F96]"></span>
+                  <div className=" px-3">
+                    <h3 className="mb-1 text-lg font-semibold text-white">
+                      AquaLink{" "}
+                      <span className=" animate-pulse text-sm font-medium me-2 px-2.5 py-0.5 rounded bg-[#1B5F96] text-white ms-3">
+                        Latest
+                      </span>
+                    </h3>
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-500">
+                      Dec 2024 - Feb 2025
+                    </time>
+                    <p className="text-base font-normal text-gray-400 mb-2">
+                      Developed a blockchain-based platform for water credit
+                      trading and conservation incentives, promoting sustainable
+                      water usage through transparent and secure transactions.
+                      This system is integrated with an IoT tool capable of
+                      detecting water discharge and controlling automatic taps,
+                      enabling real-time monitoring and management.
+                      Additionally, it features historical visualization of
+                      water usage data, providing valuable insights to encourage
+                      responsible consumption and support data-driven
+                      decision-making.
+                    </p>
+                    <Link
+                      href={"https://aqualink.site"}
+                      target="_blank"
+                      className="text-base font-normal text-gray-400 flex items-center gap-2"
+                    >
+                      <span>Go to Project</span>
+                      <span>
+                        <ArrowRight size={17} />
+                      </span>
+                    </Link>
+                  </div>
+                </li>
+                <li className="mb-10 ms-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6  rounded-full -start-3  bg-[#1B5F96]"></span>
+                  <div className=" px-3">
+                    <h3 className="mb-1 text-lg font-semibold text-white">
+                      Outcome Based Education Sentiment Analysis
+                    </h3>
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-500">
+                      Jan 2025
+                    </time>
+                    <p className="text-base font-normal text-gray-400 mb-2">
+                      Outcome Based Education Sentiment Analysis is a project
+                      aimed at analyzing public sentiment toward the
+                      Outcome-Based Education (OBE) curriculum on Twitter. The
+                      workflow includes data scraping, cleaning, feature
+                      normalization using Word2Vec, sentiment annotation with
+                      GPT-4o-mini, and training machine learning models such as
+                      SVM, Naive Bayes, and fine-tuned IndoBERT. It also
+                      features data visualizations like label distribution,
+                      annotation agreement evaluation using Cohen's Kappa, word
+                      clouds, and model performance comparisons to gain deeper
+                      insights into sentiment trends in education discussions.
+                    </p>
+                    <Link
+                      href={
+                        "https://github.com/rafliafriza12/outcome-based-education-sentiment-analysis"
+                      }
+                      target="_blank"
+                      className="text-base font-normal text-gray-400 flex items-center gap-2"
+                    >
+                      <span>Go to Source Code</span>
+                      <span>
+                        <ArrowRight size={17} />
+                      </span>
+                    </Link>
+                  </div>
+                </li>
+                <li className="mb-10 ms-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6  rounded-full -start-3  bg-[#1B5F96]"></span>
+                  <div className=" px-3">
+                    <h3 className="mb-1 text-lg font-semibold text-white">
+                      Findora
+                    </h3>
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-500">
+                      Dec 2024
+                    </time>
+                    <p className="text-base font-normal text-gray-400 mb-2">
+                      Developed an Indonesian News Search Engine using
+                      TypeScript, Next.js, Express, and MongoDB, enabling fast
+                      and relevant news searches through the TF-IDF algorithm.
+                      Built on a corpus of local Indonesian news, the platform
+                      delivers accurate results through an interactive and
+                      user-friendly interface, providing an efficient and
+                      seamless search experience.
+                    </p>
+                    <Link
+                      href={"https://github.com/rafliafriza12/findora-frontend"}
+                      target="_blank"
+                      className="text-base font-normal text-gray-400 flex items-center gap-2"
+                    >
+                      <span>Go to Source Code</span>
+                      <span>
+                        <ArrowRight size={17} />
+                      </span>
+                    </Link>
+                  </div>
+                </li>
+                <li className="mb-10 ms-6">
+                  <span className="absolute flex items-center justify-center w-6 h-6  rounded-full -start-3  bg-[#1B5F96]"></span>
+                  <div className=" px-3">
+                    <h3 className="mb-1 text-lg font-semibold text-white">
+                      Aspirasi Mahasiswa Politeknik Citra Widya Edukasi
+                    </h3>
+                    <time className="block mb-2 text-sm font-normal leading-none text-gray-500">
+                      Nov 2024
+                    </time>
+                    <p className="text-base font-normal text-gray-400 mb-2">
+                      Developed a student aspiration platform for Politeknik
+                      Citra Widya Edukasi using the MERN stack to efficiently
+                      collect and manage student feedback. The platform ensures
+                      secure data handling and seamless communication between
+                      the frontend and backend through RESTful APIs and MongoDB
+                      integration, enabling a reliable and responsive user
+                      experience.
+                    </p>
+                    <Link
+                      href={
+                        "https://aspirasi-mahasiswa-politeknik-citra-widya-edukasi.vercel.app"
+                      }
+                      target="_blank"
+                      className="text-base font-normal text-gray-400 flex items-center gap-2"
+                    >
+                      <span>Go to Project</span>
+                      <span>
+                        <ArrowRight size={17} />
+                      </span>
+                    </Link>
+                  </div>
+                </li>
+              </ol>
             </div>
           </div>
         </div>

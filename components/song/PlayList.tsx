@@ -234,11 +234,7 @@ const PlayList = () => {
           isOpen ? "h-[150px]" : "h-[0px]"
         }`}
       ></canvas>
-      <h1
-        className={`text-lg font-bold text-white duration-300 ${
-          isOpen ? "" : "hidden"
-        }`}
-      >
+      <h1 className={`text-lg font-bold text-white duration-300 text-center`}>
         {playlist[currentSong].title}
       </h1>
       <audio
@@ -249,21 +245,9 @@ const PlayList = () => {
         onCanPlay={() => isPlaying && audioRef.current?.play()}
       />
       <div
-        className={`flex items-center  w-full duration-300 z-0 relative ${
-          isOpen ? "justify-center" : "justify-end gap-5"
-        }`}
+        className={`flex items-center w-full duration-300 z-0 relative justify-center`}
       >
-        <div
-          className={`${
-            isOpen ? "hidden" : "absolute left-0 flex flex-col gap-1"
-          } duration-300 `}
-        >
-          <h1 className="text-lg font-bold text-white">
-            {playlist[currentSong].songTitle}
-          </h1>
-          <h1 className="text-sm text-white">{playlist[currentSong].artist}</h1>
-        </div>
-        <div className={`flex items-center  ${isOpen ? "gap-10" : "gap-5"}`}>
+        <div className={`flex items-center gap-10`}>
           <button
             onClick={handlePrev}
             className="text-white rounded cursor-pointer font-bold"
@@ -285,9 +269,7 @@ const PlayList = () => {
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`${
-            isOpen ? "absolute right-0" : ""
-          } text-white cursor-pointer duration-300`}
+          className={`text-white cursor-pointer duration-300 absolute right-0`}
         >
           {isOpen ? (
             <ChevronDown strokeWidth={3} />

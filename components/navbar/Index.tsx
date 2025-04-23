@@ -250,9 +250,6 @@ const Navbar: React.FC = () => {
             <Link className=" hover:underline" href={"/resume"}>
               Resume
             </Link>
-            <Link className=" hover:underline" href={"/project"}>
-              Project
-            </Link>
             <Link className=" hover:underline" href={"/contact"}>
               Contact
             </Link>
