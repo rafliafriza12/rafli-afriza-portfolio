@@ -5,6 +5,7 @@ import ProfileCard from "@/components/card/ProfileCard";
 import ServiceCard from "@/components/card/ServiceCard";
 import { service } from "@/datas/service";
 import { Service } from "@/types";
+
 import {
   Laptop,
   UserRoundSearch,
@@ -184,9 +185,13 @@ const Home = () => {
           </p>
 
           <div className="w-full flex justify-start items-center gap-4 pt-5 lg:pt-20 text-xs lg:text-base text-white font-semibold">
-            <button className=" px-4 py-3 bg-[#1B5F96] rounded-md">
+            <a
+              href="/assets/cv/CV-Rafli-Afriza-Nugraha.pdf"
+              download={"CV-Rafli-Afriza-Nugraha.pdf"}
+              className=" px-4 py-3 bg-[#1B5F96] rounded-md cursor-pointer"
+            >
               Download CV
-            </button>
+            </a>
             <Link
               href={"/contact"}
               className=" px-4 py-3 bg-[#31363F] rounded-md"
