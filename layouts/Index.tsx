@@ -7,6 +7,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { IsDesktop } from "@/hooks";
+import NextTopLoader from "nextjs-toploader";
 import PlayList from "@/components/song/PlayList";
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const isDesktop = IsDesktop();
@@ -28,12 +29,15 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   // }
 
   return (
-    <div className="flex lg:justify-between w-screen">
-      <Navbar />
-      <div className="w-full lg:w-[76%] overflow-x-hidden bg-[#1E252D] scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-[#888888] scrollbar-track-[#1E252D]">
-        {children}
+    <>
+      <NextTopLoader color="#1B5F96" showSpinner={false} />
+      <div className="flex lg:justify-between w-screen">
+        <Navbar />
+        <div className="w-full lg:w-[76%] overflow-x-hidden bg-[#1E252D] scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-[#888888] scrollbar-track-[#1E252D]">
+          {children}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
