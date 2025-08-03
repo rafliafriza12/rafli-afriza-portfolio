@@ -21,3 +21,7 @@ export interface PlaylistType {
   songTitle: string;
   src: string;
 }
+
+export interface IShortTechstack {
+  technology: string;
+}

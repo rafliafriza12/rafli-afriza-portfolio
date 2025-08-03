@@ -1,201 +1,208 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PlayList from "../song/PlayList";
 import { Instagram, Linkedin, Github } from "lucide-react";
-import { useEffect } from "react";
+import { IsDesktop } from "@/hooks"; // Assuming this hook correctly identifies desktop vs. mobile
+
 const Navbar: React.FC = () => {
-  const [isFocus, setIsfocus] = useState<boolean>(false);
-  const [isActiveSection, setIsActiveSection] = useState<number>(1);
-  const [height, setHeight] = useState<boolean>(false);
-  const [width, setWidth] = useState<boolean>(false);
-  const [listNav, setListNav] = useState<boolean>(false);
-  const [listHover, setListHover] = useState<number>(0);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [heightTransition, setHeightTransition] = useState<boolean>(false);
+  const [widthTransition, setWidthTransition] = useState<boolean>(false);
   const [prevScrollPos, setPrevScrollPos] = useState<number>(0);
   const [isScrollDown, setIsScrollDown] = useState<boolean>(false);
-  const [isHoverInstagram, setIsHoverInstagram] = useState<boolean>(false);
-  const [isHoverEmail, setIsHoverEmail] = useState<boolean>(false);
-  const [isHoverGithub, setIsHoverGithub] = useState<boolean>(false);
-  const [isSmallScreen, setIsSmallScreen] = useState<boolean>();
 
-  const sizeHandler = () => {
+  // Hover states for social icons (can be simplified if dynamic colors aren't complex)
+  const [isHoverInstagram, setIsHoverInstagram] = useState<boolean>(false);
+  const [isHoverLinkedin, setIsHoverLinkedin] = useState<boolean>(false); // Renamed from isHoverEmail for clarity
+  const [isHoverGithub, setIsHoverGithub] = useState<boolean>(false);
+
+  const isDesktop = IsDesktop(); // Use isDesktop for clarity
+
+  const handleMobileMenuClick = () => {
+    // Disable button to prevent rapid clicks during transition
+    const mobileButton = document.getElementById(
+      "mobile-button"
+    ) as HTMLButtonElement;
+    if (mobileButton) mobileButton.disabled = true;
+
+    // Trigger height transition
+    setHeightTransition(!heightTransition);
+
+    // Trigger width transition after a delay
     setTimeout(() => {
-      setHeight(!height);
-    }, 0);
+      setWidthTransition(!widthTransition);
+    }, 350); // Matches the width transition duration
+
+    // Toggle menu state
+    setIsMenuOpen((prev) => !prev);
+
+    // Re-enable button after all transitions complete (adjust delay if needed)
     setTimeout(() => {
-      setWidth(!width);
-    }, 350);
+      if (mobileButton) mobileButton.disabled = false;
+    }, 500); // Should be greater than the longest transition duration
   };
 
-  const listViewHandler = () => {
-    if (!listNav) {
-      setTimeout(() => {
-        setListNav(!listNav);
-      }, 490);
-    } else {
-      setListNav(!listNav);
+  const handleLinkClick = () => {
+    // Close mobile menu when a link is clicked
+    if (!isDesktop) {
+      handleMobileMenuClick();
     }
   };
 
-  const handleClick = () => {
-    const mobilButton = document.getElementById(
-      "mobile-button"
-    ) as HTMLButtonElement;
-    mobilButton.disabled = true;
-    setTimeout(() => {
-      mobilButton.disabled = false;
-    }, 500);
-    sizeHandler();
-    setIsfocus((state) => !state);
-    listViewHandler();
-  };
-
   const handleScroll = () => {
-    // console.log(isFocus);
-    if (!isFocus) {
+    if (!isMenuOpen) {
+      // Only track scroll if the mobile menu is not open
       const currentScrollPos: number = window.pageYOffset;
-      if (Math.abs(currentScrollPos - prevScrollPos) > 100 && !isFocus) {
-        if (currentScrollPos > prevScrollPos) {
-          setIsScrollDown(true);
-          // console.log("Down");
-        } else {
-          setIsScrollDown(false);
-          // console.log("Up");
-        }
+      if (Math.abs(currentScrollPos - prevScrollPos) > 50) {
+        // Reduced threshold for more sensitive scroll detection
+        setIsScrollDown(currentScrollPos > prevScrollPos);
         setPrevScrollPos(currentScrollPos);
       }
     }
   };
 
   useEffect(() => {
-    window.innerWidth <= 640 ? setIsSmallScreen(true) : setIsSmallScreen(false);
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [prevScrollPos, isFocus, isActiveSection]);
+  }, [prevScrollPos, isMenuOpen]); // Dependency on isMenuOpen ensures correct behavior when menu opens/closes
 
-  if (isSmallScreen) {
-    return (
-      <div className=" w-screen relative z-[100]">
-        <div className="lg:hidden w-full flex justify-center items-center px-7 box-border">
-          <div
-            className={`flex flex-col box-border justify-between items-start rounded-xl h-[10%] min-h-10 max-h-16 fixed z-[151] duration-[0.3s] ${
-              !isScrollDown ? "bottom-[3%]" : "bottom-[-10%]"
-            } ${
-              width
-                ? "min-w-[88%] max-w-[88%] sm:min-w-[65%] sm:max-w-[65%]"
-                : "min-w-32 max-w-40"
-            } ${
-              height ? "min-h-[80%] max-h-[80%]" : "min-h-10 max-h-16"
-            } bg-[#1E252D] py-4 border-[#888888] border-[1.8px]`}
+  return (
+    <>
+      {/* Mobile Navbar (visible only on small screens) */}
+      <div
+        className={`
+          lg:hidden flex flex-col box-border justify-between items-start rounded-xl duration-[0.3s]
+          fixed z-[151] left-1/2 -translate-x-1/2 bg-[#1E252D]/50 py-4 border-[#888888] border-[1.8px] backdrop-blur-[8px]
+          ${!isScrollDown ? "bottom-[3%]" : "bottom-[-10%]"}
+          ${
+            widthTransition
+              ? "min-w-[88%] max-w-[88%] sm:min-w-[65%] sm:max-w-[65%]"
+              : "min-w-32 max-w-40"
+          }
+          ${heightTransition ? "min-h-[80%] max-h-[80%]" : "min-h-10 max-h-16"}
+          
+        `}
+      >
+        <div className="box-border px-7 h-[90%] w-full overflow-hidden">
+          <ol
+            className={`relative box-border duration-300 ${
+              isMenuOpen ? "opacity-[1]" : "opacity-0 "
+            }`}
           >
-            <div className=" box-border px-7 h-[90%]">
-              <ol className={`relative box-border ${listNav ? "" : "hidden"}`}>
-                <li className="mb-10 ms-4">
-                  <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
-                  <Link href={"/"} onClick={() => handleClick()}>
-                    <time className="mb-1 text-sm font-bold leading-none text-gray-400 ">
-                      About Me
-                    </time>
-                  </Link>
-                </li>
-                <li className="mb-10 ms-4">
-                  <div className="absolute w-3 h-3  rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
-                  <Link href={"/Pages/Resume"} onClick={() => handleClick()}>
-                    <time className="mb-1 text-sm font-bold leading-none text-gray-400 ">
-                      Resume
-                    </time>
-                  </Link>
-                </li>
-                <li className="mb-10 ms-4">
-                  <div className="absolute w-3 h-3  rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
-                  <Link href={"/Pages/Project"} onClick={() => handleClick()}>
-                    <time className="mb-1 text-sm font-bold leading-none text-gray-400 ">
-                      Project
-                    </time>
-                  </Link>
-                </li>
-                <li className="mb-10 ms-4">
-                  <div className="absolute w-3 h-3  rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
-                  <Link onClick={() => handleClick()} href={"/Pages/Contact"}>
-                    <time className="mb-1 text-sm font-bold leading-none text-gray-400 ">
-                      Contact
-                    </time>
-                  </Link>
-                </li>
-              </ol>
-            </div>
+            <li className="mb-8 ms-4">
+              {" "}
+              {/* Adjusted margin-bottom */}
+              <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
+              <Link href={"/"} onClick={handleLinkClick}>
+                <time className="mb-1 text-sm font-bold leading-none text-gray-400">
+                  About Me
+                </time>
+              </Link>
+            </li>
+            <li className="mb-8 ms-4">
+              {" "}
+              {/* Adjusted margin-bottom */}
+              <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
+              <Link href={"/resume"} onClick={handleLinkClick}>
+                <time className="mb-1 text-sm font-bold leading-none text-gray-400">
+                  Resume
+                </time>
+              </Link>
+            </li>
+            <li className="mb-8 ms-4">
+              {" "}
+              {/* Adjusted margin-bottom */}
+              <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
+              <Link onClick={handleLinkClick} href={"/comment"}>
+                <time className="mb-1 text-sm font-bold leading-none text-gray-400">
+                  All Comment
+                </time>
+              </Link>
+            </li>
+            <li className="mb-8 ms-4">
+              {" "}
+              {/* Adjusted margin-bottom */}
+              <div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-gray-400"></div>
+              <Link onClick={handleLinkClick} href={"/contact"}>
+                <time className="mb-1 text-sm font-bold leading-none text-gray-400">
+                  Contact
+                </time>
+              </Link>
+            </li>
+          </ol>
+        </div>
 
-            <div className="w-full">
-              <ul className="w-full flex justify-between px-6 items-center text-white">
-                <li>
-                  <div className=" h-7 w-7 rounded-full overflow-hidden border-[1px] border-[#888888] relative">
-                    <Image
-                      src={"/img/photo2.png"}
-                      objectFit="cover"
-                      layout="fill"
-                      alt="HMIF"
-                      className=""
-                    />
-                  </div>
-                </li>
-                <li>
-                  <div className=" h-7 w-7">
-                    <button
-                      id="mobile-button"
-                      className=" h-full w-full transition-all duration-[0.5s]"
-                      onClick={() => handleClick()}
+        <div className="w-full">
+          <ul className="w-full flex justify-between px-6 items-center text-white">
+            <li>
+              <div className="h-7 w-7 rounded-full overflow-hidden border-[1px] border-[#888888] relative">
+                <Image
+                  src={"/assets/img/photo2.png"}
+                  objectFit="cover"
+                  layout="fill"
+                  alt="Rafli Afriza Nugraha"
+                  className=""
+                />
+              </div>
+            </li>
+            <li>
+              <div className="h-7 w-7">
+                <button
+                  id="mobile-button"
+                  className="h-full w-full transition-all duration-[0.5s]"
+                  onClick={handleMobileMenuClick}
+                >
+                  {isMenuOpen ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6"
                     >
-                      {isFocus ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M6 18 18 6M6 6l12 12"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          className=" object-fill"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                          />
-                        </svg>
-                      )}
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="object-fill"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-    );
-  }
 
-  if (!isSmallScreen) {
-    return (
-      <div className=" sticky top-0 left-0 z-0 w-[24%] h-screen bg-[#31363F] flex flex-col">
-        <div className=" w-full h-[35%] bg-[#2E3138] box-border p-5 flex flex-col items-center justify-center gap-12">
-          <div className=" flex flex-col items-center gap-3">
-            <div className=" rounded-full h-[100px] w-[100px] border-[2px] border-[#1E252D] overflow-hidden relative">
+      {/* Desktop Navbar (visible only on large screens) */}
+      <div className="hidden lg:sticky lg:top-0 lg:left-0 lg:z-0 lg:w-[24%] lg:h-screen lg:bg-[#31363F] lg:flex lg:flex-col">
+        <div className="w-full h-[35%] bg-[#2E3138] box-border p-5 flex flex-col items-center justify-center gap-8 xl:gap-12">
+          {" "}
+          {/* Adjusted gap for desktop */}
+          <div className="flex flex-col items-center gap-3">
+            <div className="rounded-full h-[80px] w-[80px] md:h-[100px] md:w-[100px] border-[2px] border-[#1E252D] overflow-hidden relative">
+              {" "}
+              {/* Adjusted image size for responsiveness */}
               <Image
                 src={"/assets/img/photo2.png"}
                 alt="Profile"
@@ -203,16 +210,22 @@ const Navbar: React.FC = () => {
                 layout="fill"
               />
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <h1 className=" font-bold text-white text-2xl">
+            <div className="flex flex-col items-center gap-1 xl:gap-2">
+              {" "}
+              {/* Adjusted gap */}
+              <h1 className="font-bold text-white text-xl md:text-2xl text-center">
+                {" "}
+                {/* Adjusted text size */}
                 Rafli Afriza Nugraha
               </h1>
-              <h1 className=" font-semibold text-center text-[#888888] text-sm">
-                Web Developer | Frontend Engineer | Blockchain Enthusiast
+              <h1 className="font-semibold text-center text-[#888888] text-sm">
+                Software Engineer
               </h1>
             </div>
           </div>
-          <div className=" w-full flex justify-center items-center gap-7">
+          <div className="w-full flex justify-center items-center gap-5 xl:gap-7">
+            {" "}
+            {/* Adjusted gap */}
             <Link
               href={"https://www.instagram.com/rafliafriza_"}
               target="_blank"
@@ -228,9 +241,9 @@ const Navbar: React.FC = () => {
               target="_blank"
             >
               <Linkedin
-                color={`${!isHoverEmail ? "#888888" : "#ffffff"}`}
-                onMouseOver={() => setIsHoverEmail(true)}
-                onMouseOut={() => setIsHoverEmail(false)}
+                color={`${!isHoverLinkedin ? "#888888" : "#ffffff"}`}
+                onMouseOver={() => setIsHoverLinkedin(true)}
+                onMouseOut={() => setIsHoverLinkedin(false)}
               />
             </Link>
             <Link href={"https://github.com/rafliafriza12"} target="_blank">
@@ -242,27 +255,53 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="w-full  p-7">
-          <ul className="text-right text-white font-semibold flex flex-col gap-5">
-            <Link className=" hover:underline" href={"/"}>
-              About Me
-            </Link>
-            <Link className=" hover:underline" href={"/resume"}>
-              Resume
-            </Link>
-            <Link className=" hover:underline" href={"/contact"}>
-              Contact
-            </Link>
+        <div className="w-full p-5 md:p-7">
+          {" "}
+          {/* Adjusted padding */}
+          <ul className="text-right text-white font-semibold flex flex-col gap-4 md:gap-5">
+            {" "}
+            {/* Adjusted gap */}
+            <li>
+              <Link
+                className="hover:underline text-base md:text-base"
+                href={"/"}
+              >
+                About Me
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="hover:underline text-base md:text-base"
+                href={"/resume"}
+              >
+                Resume
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="hover:underline text-base md:text-base"
+                href={"/comment"}
+              >
+                All Comment
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="hover:underline text-base md:text-base"
+                href={"/contact"}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
-        {/* Mobile Navbar */}
-        <div className=" w-[90%] absolute z-[10] bottom-5 right-5">
+        <div className="w-[90%] absolute z-[10] bottom-5 right-5">
           <PlayList />
         </div>
       </div>
-    );
-  }
+    </>
+  );
 };
 
 export default Navbar;

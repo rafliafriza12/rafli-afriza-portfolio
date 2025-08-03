@@ -15,6 +15,8 @@ import Image from "next/image";
 import { playlist } from "@/datas/playlist";
 import { PlaylistType } from "@/types";
 const PlayList = () => {
+  const [isPlaylistMenuOpen, setIsPlaylistMenuOpen] = useState<boolean>(false);
+  const [playlistCategory, setPlaylistCategory] = useState<string>("Chill");
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -193,10 +195,67 @@ const PlayList = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-5 bg-[#1E1E1E]/50 rounded-2xl gap-5 duration-300">
+      <div className=" w-full">
+        <div
+          id="dropdownDelayButton"
+          data-dropdown-toggle="dropdownDelay"
+          data-dropdown-delay="500"
+          data-dropdown-trigger="hover"
+          onClick={() => setIsPlaylistMenuOpen(!isPlaylistMenuOpen)}
+          className="text-white font-semibold rounded-lg text-sm text-left inline-flex items-center cursor-pointer"
+        >
+          {playlistCategory} Playlist{" "}
+          <svg
+            className="w-2.5 h-2.5 ms-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
+        </div>
+
+        <div
+          id="dropdownDelay"
+          className={`z-10 absolute ${
+            isPlaylistMenuOpen ? "" : "hidden"
+          } rounded-lg shadow-sm w-44 bg-gray-700 mt-2`}
+        >
+          <ul
+            className="py-2 text-sm text-gray-200 w-full"
+            aria-labelledby="dropdownDelayButton"
+          >
+            <li>
+              <button
+                onClick={() => (
+                  setPlaylistCategory("Chill"), setIsPlaylistMenuOpen(false)
+                )}
+                className="block px-4 py-2 hover:bg-gray-600 hover:text-white w-full text-left"
+              >
+                Chill
+              </button>
+            </li>
+            {/* <li>
+              <button
+                onClick={() => (
+                  setPlaylistCategory(`Vibin' DJ`), setIsPlaylistMenuOpen(false)
+                )}
+                className="block px-4 py-2 hover:bg-gray-600 hover:text-white w-full text-left"
+              >
+                Vibin' DJ
+              </button>
+            </li> */}
+          </ul>
+        </div>
+      </div>
       <div className={`w-full flex flex-col gap-3 ${isOpen ? "" : "hidden"}`}>
-        <button onClick={() => setIsPlaylistOpen(!isPlaylistOpen)}>
-          {!isPlaylistOpen ? <Menu color="white" /> : <X color="white" />}
-        </button>
         <div
           className={`w-full duration-300 scrollbar-thumb-rounded-full scrollbar-thin scrollbar-thumb-[#888888] scrollbar-track-[#1E1E1E]/50 ${
             isPlaylistOpen
@@ -244,9 +303,12 @@ const PlayList = () => {
         onLoadedMetadata={handleLoadedMetadata}
         onCanPlay={() => isPlaying && audioRef.current?.play()}
       />
-      <div
-        className={`flex items-center w-full duration-300 z-0 relative justify-center`}
-      >
+      <div className={`flex justify-between items-center w-full duration-300 `}>
+        <button
+          onClick={() => (setIsPlaylistOpen(!isPlaylistOpen), setIsOpen(true))}
+        >
+          {!isPlaylistOpen ? <Menu color="white" /> : <X color="white" />}
+        </button>
         <div className={`flex items-center gap-10`}>
           <button
             onClick={handlePrev}
@@ -268,8 +330,8 @@ const PlayList = () => {
           </button>
         </div>
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`text-white cursor-pointer duration-300 absolute right-0`}
+          onClick={() => (setIsPlaylistOpen(false), setIsOpen(!isOpen))}
+          className={`text-white cursor-pointer duration-300 `}
         >
           {isOpen ? (
             <ChevronDown strokeWidth={3} />

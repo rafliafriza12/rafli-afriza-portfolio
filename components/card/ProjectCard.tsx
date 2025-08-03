@@ -1,34 +1,40 @@
 import Link from "next/link";
 import Image from "next/image";
-const ProjectCard: React.FC = () => {
+import { ArrowRight } from "lucide-react";
+import { TProjectCardProps } from "@/types/project.type";
+const ProjectCard: React.FC<TProjectCardProps> = ({
+  slug,
+  title,
+  description,
+  imgUrl,
+}) => {
   return (
-    <Link
-      href={"#"}
-      className=" w-full h-[500px] rounded-md bg-[#31363F] text-[#e4e3e3] flex flex-col gap-2 overflow-hidden group"
-    >
-      <div className=" w-full h-[50%] overflow-hidden relative">
+    <div className=" w-full rounded-2xl flex flex-col gap-5 bg-white/[0.03] p-5 md:p-7 duration-300 border border-white/10 hover:border-white/20 group">
+      <div className=" w-full h-[200px] rounded-xl overflow-hidden relative">
         <Image
-          src={"/assets/songPic/d4vd.jpeg"}
-          alt="project"
+          src={imgUrl}
+          alt={title}
           fill
-          className=" object-cover group-hover:scale-[1.1] duration-500"
+          className="w-full h-full object-cover duration-300 group-hover:scale-[1.2]"
         />
       </div>
+      <h1 className=" line-clamp-2 font-bold text-base lg:text-ll text-white">
+        {title}
+      </h1>
+      <p className=" w-full text-left text-xs lg:text-sm text-gray-400 line-clamp-3">
+        {description}
+      </p>
 
-      <div className=" flex flex-col w-full px-4 gap-3">
-        <h1 className=" font-bold text-2xl">Aqualink</h1>
-        <p>
-          I have completed developing a landing page for the Informatics Student
-          Association using Next.js TypeScript. The project includes a
-          responsive and modern interface design, with optimized performance to
-          ensure a seamless user experience across devices. By leveraging the
-          advantages of server-side rendering and efficient routing from
-          Next.js, I was able to create pages that were fast, secure, and easy
-          to manage, while meeting the organization's needs in conveying
-          information to students effectively.
-        </p>
+      <div className="w-full flex justify-end">
+        <Link
+          href={`/project/${slug}`}
+          className="px-4 py-2 rounded-md bg-gray-600 text-white flex items-center gap-2 "
+        >
+          <span className=" text-sm font-semibold">Details</span>
+          <ArrowRight size={17} />
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 

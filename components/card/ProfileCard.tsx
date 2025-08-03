@@ -27,7 +27,7 @@ const ProfileCard: React.FC = () => {
       grabCursor={true}
       modules={[EffectCards, Pagination, Navigation]}
       navigation={true}
-      className="w-[80%] h-[50vh] lg:h-[65vh] mySwiper"
+      className=" h-[400px] w-[90%] lg:h-[500px] lg:w-[400px] mySwiper"
       initialSlide={1}
       pagination={{ clickable: true }}
     >
@@ -37,7 +37,7 @@ const ProfileCard: React.FC = () => {
             key={i}
             className=" border-[1px] shadow-[0px_4px_10px_#888888] border-[#888888]"
           >
-            <div className="w-full h-[70vh] bg-transparent overflow-hidden relative ">
+            <div className="w-full h-full bg-transparent overflow-hidden relative ">
               <Image
                 src={photo.url}
                 alt="Photo"
