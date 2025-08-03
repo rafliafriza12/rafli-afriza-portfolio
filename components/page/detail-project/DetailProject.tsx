@@ -40,7 +40,7 @@ const DetailProjectPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // isValidFileType sekarang mengembalikan string pesan error atau true
   const isValidFileType = useCallback((file: File): string | boolean => {
-    const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+    const validTypes = ["image/jpeg", "image/png", "image/jpg", "image/gif"];
     const maxSize = 5 * 1024 * 1024; // 5MB (dikoreksi agar konsisten dengan teks di UI)
 
     if (!validTypes.includes(file.type)) {
