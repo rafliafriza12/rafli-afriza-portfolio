@@ -104,16 +104,16 @@ const PlayList = () => {
 
     const renderFrame = () => {
       requestAnimationFrame(renderFrame);
-      analyser.getByteFrequencyData(dataArray);
+      analyser.getByteFrequencyData(dataArray as any); // <--- PERBAIKAN PENTING DI SINI
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#31363F";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const barWidth = (canvas.width / dataArray.length) * 2.5;
+      const barWidth = (canvas.width / dataArray!.length) * 2.5;
       let barHeight;
       let x = 0;
-      for (let i = 0; i < dataArray.length; i++) {
-        barHeight = dataArray[i] / 2;
+      for (let i = 0; i < dataArray!.length; i++) {
+        barHeight = dataArray![i] / 2;
         ctx.fillStyle = `rgb(${barHeight + 100},50,150)`;
         ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth + 1;
