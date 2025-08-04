@@ -36,7 +36,13 @@ const Navbar: React.FC = () => {
     }, 350); // Matches the width transition duration
 
     // Toggle menu state
-    setIsMenuOpen((prev) => !prev);
+    if (!isMenuOpen) {
+      setTimeout(() => {
+        setIsMenuOpen((prev) => !prev);
+      }, 400);
+    } else {
+      setIsMenuOpen((prev) => !prev);
+    }
 
     // Re-enable button after all transitions complete (adjust delay if needed)
     setTimeout(() => {
@@ -89,8 +95,8 @@ const Navbar: React.FC = () => {
       >
         <div className="box-border px-7 h-[90%] w-full overflow-hidden">
           <ol
-            className={`relative box-border duration-300 ${
-              isMenuOpen ? "opacity-[1]" : "opacity-0 "
+            className={`relative box-border duration-300  ${
+              isMenuOpen ? "opacity-[1]" : "opacity-0 hidden"
             }`}
           >
             <li className="mb-8 ms-4">

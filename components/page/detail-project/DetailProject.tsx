@@ -19,10 +19,11 @@ import API from "@/utils/API";
 import { CircleUser } from "lucide-react";
 import moment from "moment";
 import { ToastContainer, Bounce, toast } from "react-toastify";
+import { IsDesktop } from "@/hooks";
 
 const DetailProjectPage: React.FC = () => {
   const { slug } = useParams();
-
+  const isDesktop = IsDesktop();
   const project = useMemo(() => {
     if (!slug || typeof slug !== "string") return undefined;
     return getProjectBySlug(slug);
@@ -103,7 +104,7 @@ const DetailProjectPage: React.FC = () => {
         handleRemoveImage();
         getComment(); // Panggil fungsi untuk memuat ulang komentar
         toast.success(res.data.message, {
-          position: "bottom-right",
+          position: isDesktop ? "bottom-right" : "top-center",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: false,
@@ -117,7 +118,7 @@ const DetailProjectPage: React.FC = () => {
       })
       .catch((err) => {
         toast.error(err.response.data.message ?? "Fail while send comment", {
-          position: "bottom-right",
+          position: isDesktop ? "bottom-right" : "top-center",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: false,
@@ -629,7 +630,7 @@ const DetailProjectPage: React.FC = () => {
             </div>
           </div>
           {isLoading ? (
-            <div className="w-full bg-white/[0.02] backdrop-blur-xl rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10 w-full flex flex-col gap-5 animate-pulse">
+            <div className="w-full bg-white/[0.02] backdrop-blur-xl rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10  flex flex-col gap-5 animate-pulse">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 flex-shrink-0 bg-gray-600 rounded-full"></div>
                 <div className="flex-1 space-y-2">
@@ -697,7 +698,7 @@ const DetailProjectPage: React.FC = () => {
         </div>
       </div>
       <ToastContainer
-        position="bottom-right"
+        position={isDesktop ? "bottom-right" : "top-center"}
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
