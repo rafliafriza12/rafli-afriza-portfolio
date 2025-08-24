@@ -216,8 +216,8 @@ const ResumePage: React.FC = () => {
                       </span>
                     </h3>
                     <time className="block mb-2 text-xs md:text-sm font-normal leading-none text-gray-500">
-                      Physics Department of Syiah Kuala University, May 2024 -
-                      Present
+                      Physics Department of Syiah Kuala University, May 2025 -
+                      Aug 2025
                     </time>
                     <p className="text-sm md:text-base font-normal text-gray-400">
                       As a Full-Stack Engineer, focusing on developing robust
